@@ -24,10 +24,18 @@ app.post('/login', (req, res) => {
         if(err){
             return res.json("Error");
         }
+
         if(data.length > 0){
-            return res.json("Success");
+            const user = data[0];
+            const {Password, ...user_No_Pass} = user; 
+
+            return res.status(200).json({
+                status: "Success",
+                user: user_No_Pass,
+            });
         } else{
             return res.json("Fail");
         }
     })
 })
+

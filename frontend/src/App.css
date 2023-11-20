@@ -12,6 +12,9 @@
 
   .Page-Header{
     font-family:'Times New Roman', Times, serif;
+    font-size: 50px;
+    position: relative;
+    top: -100px;
   }
 
   .Login-Background{
@@ -20,4 +23,27 @@
     background-color: rgba(255, 255, 255, 0.39);
     padding: 20px;
     border-radius: 10%;
+    position: relative;
+    top: -40px;
+  }
+
+  .Home-List{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 22px;
+    justify-content: center; 
+  }
+
+  .Home-List img{
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .btn-logout{
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }

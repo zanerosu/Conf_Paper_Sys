@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import Validation from './LoginValidation';
 import axios from 'axios';
+import { useUser } from './UserContext';
 
 
 
@@ -12,6 +13,7 @@ function Login() {
     })
 
     const navigate = useNavigate();
+    const { loginUser } = useUser();
     const [errors, setErrors] = useState({})
 
     const handleInput = (event) => {
@@ -27,7 +29,8 @@ function Login() {
             axios.post('http://localhost:8081/login', values)
             .then(res => {
                 console.log(res.data);
-                if(res.data === "Success"){
+                if(res.data.status === "Success"){
+                    loginUser(res.data.user);
                     navigate('/home');
                 } else {
                     alert("No account!")
@@ -39,9 +42,12 @@ function Login() {
 
   return (
     <div className='Login-Page'>
-        <h1>Conference Paper Review System</h1>
+        <h1 className='Page-Header'>
+            Conference Paper <br/>
+            Review System
+        </h1>
         <div className='Login-Background'>
-            <h1 className='Page-Header'>Login</h1>
+            <h1 className='Login-Header'>Login</h1>
             <form action = "" onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlfor = 'username'><strong>Username</strong></label>
@@ -60,8 +66,7 @@ function Login() {
                 <button type = 'submit' className='btn btn-success w-100'><strong>Log in</strong></button>
 
             </form>
-    </div>
-
+        </div>
     </div>
   )
 }
