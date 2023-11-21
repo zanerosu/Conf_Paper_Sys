@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUser } from './UserContext';
 
 function Home() {
@@ -18,10 +18,12 @@ function Home() {
       <button type = 'submit' className='btn btn-success btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
         <h1 className='Page-Header'>Welcome, {user ? user.Fname : 'Guest'}</h1>
         <div className='Home-List'>
-          <ul>
-            <img src = "Create_Conf_Icon.png" alt = "Icon 1"/>
-            <br/>
-            Create Conference
+          <ul onClick={() => navigate('/New-Conference')} id = "New_Conference">
+            <label for = "New_Conference">
+              <img src = "Create_Conf_Icon.png" alt = "Icon 1"/>
+              <br/>
+              <a>Create Conference</a>
+            </label>
           </ul>
           <ul>
             <img src = "Author-Icon.png" alt = "Icon 2"/>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import Validation from './LoginValidation';
 import axios from 'axios';
 import { useUser } from './UserContext';
@@ -46,8 +46,8 @@ function Login() {
             Conference Paper <br/>
             Review System
         </h1>
-        <div className='Login-Background'>
-            <h1 className='Login-Header'>Login</h1>
+        <div className='Form-Background'>
+            <h1>Login</h1>
             <form action = "" onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlfor = 'username'><strong>Username</strong></label>

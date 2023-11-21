@@ -17,7 +17,7 @@
     top: -100px;
   }
 
-  .Login-Background{
+  .Form-Background{
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.39);
@@ -47,3 +47,11 @@
     top: 10px;
     right: 10px;
   }
+
+  .btn-home{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  
