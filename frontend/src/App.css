@@ -1,9 +1,9 @@
 .App {
+    align-items: center;
     text-align: center;
+    justify-content: center;
     display: flex;
     min-height: 100vh;
-    align-items: center;
-    justify-content: center;
     color: white;
     background-image: url('/public/loginbackground.jpg');
     background-size: cover;
@@ -15,6 +15,7 @@
     font-size: 50px;
     position: relative;
     top: -100px;
+    text-align: center;
   }
 
   .Form-Background{
@@ -58,8 +59,27 @@
     left: 10px;
   }
 
+  .Curr-User{
+    position: absolute;
+    top: 15px;
+    right: 200px;
+  }
+
   .New-Conf-Header{
     top: -20px
+  }
+
+  .Home-Image{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    bottom: 40px;
+    left: 20px
+  }
+
+  .Author_Home{
+    position:relative;
+    bottom:60px;
   }
 
   

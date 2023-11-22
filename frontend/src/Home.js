@@ -16,6 +16,7 @@ function Home() {
   return (
     <div className='Home-Page'>
       <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
+      <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
         <h1 className='Page-Header'>Welcome, {user ? user.Fname : 'Guest'}</h1>
         <div className='Home-List'>
           <ul onClick={() => navigate('/New-Conference')} id = "New_Conference">
