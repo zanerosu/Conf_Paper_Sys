@@ -2,6 +2,7 @@ import React from 'react'
 import Login from './Login'
 import Home from './Home'
 import New_Conference from './New_Conference';
+import Author_Home from './Author_Home';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
           <Route path = '/' element = {<Login/>}></Route>
           <Route path = '/home' element = {<Home/>}></Route>
           <Route path = '/New-Conference' element = {<New_Conference/>}></Route>
+          <Route path = '/Author-Home' element = {<Author_Home/>}></Route>
         </Routes>
     </BrowserRouter>
     </div>

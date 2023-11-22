@@ -46,7 +46,7 @@ function Login() {
             Conference Paper <br/>
             Review System
         </h1>
-        <div className='Form-Background'>
+        <div className='Form-Background Login-Form'>
             <h1>Login</h1>
             <form action = "" onSubmit={handleSubmit}>
                 <div className='mb-3'>
