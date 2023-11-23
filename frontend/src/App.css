@@ -28,6 +28,10 @@
     
   }
 
+  img:hover{
+    filter:brightness(75%);
+  }
+
   .Login-Form{
     top: -40px;
   }
