@@ -1,15 +1,11 @@
 # Conference Paper Review System
 
-Install the following before running:
+Required Node.js to be installed on machine.
 
-1. Node.js
-2. React
-3. Express
-4. Xampp DB
+## In VSCode:
 
-## Install in Backend folder:
+1. Open the terminal in VS Code.
+2. Connect to the backend folder and run "npm install"
+3. Connect to the frontend foler and run "npm install"
 
-\*\*\*Need to find how to best run project on new machine
-May end up trying to use a .venv file
-
-## Install in Frontend folder:
+Project uses XAMPP control panel for database managment
