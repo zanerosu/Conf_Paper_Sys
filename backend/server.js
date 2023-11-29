@@ -66,3 +66,26 @@ app.post('/New-Conference', (req, res) => {
         });
     });
 });
+
+app.post('/New-Paper', (req, res) => {
+    const sql = "INSERT INTO `papers` (`Title`, `Author`, `Status`) VALUES (?)";
+    const values = [
+        req.body.Title,
+        req.body.Author,
+        req.body.Status,
+    ]
+    db.query(sql, [values], (error, data)=>{
+        if (error) {
+            console.error("Error uploading paper:", error);
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        }
+
+        return res.status(201).json({
+            status: "Success",
+            data: data
+        });
+    });
+});

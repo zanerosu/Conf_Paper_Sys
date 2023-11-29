@@ -58,7 +58,7 @@ function New_Conference() {
             <h1>Details</h1>
             <form action = "" onSubmit = {handleSubmit}>
                 <div className='mb-3'>
-                    <label htmlfor = 'Conf_Name'><strong>Conference Name</strong></label>
+                    <label htmlFor = 'Conf_Name'><strong>Conference Name</strong></label>
                     <input type = 'text' placeholder= 'Enter Name' name = 'Conf_Name' className = 'form-control rounded-0' onChange={handleInput}/>
                 </div>
             
@@ -104,4 +104,4 @@ function New_Conference() {
   );
 };
 
-export default New_Conference
+export default New_Conference;

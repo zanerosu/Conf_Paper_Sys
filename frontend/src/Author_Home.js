@@ -20,7 +20,7 @@ function Author_Home() {
       <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
         <h1 className='Page-Header'>Author Home <img src = "Author-Icon.png" className = "Home-Image"/> </h1>
         <div className='Home-List Author_Home'>
-          <ul onClick={() => navigate('/home')} id = "new_paper">
+          <ul onClick={() => navigate('/New-Paper')} id = "new_paper">
             <label for = "New_Paper">
               <img src = "Paper_upload.png" alt = "Icon 1"/>
               <br/>
