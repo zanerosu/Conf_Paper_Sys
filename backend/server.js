@@ -18,6 +18,7 @@ app.listen(8081, ()=> {
     console.log("listening");
 })
 
+//Login a user based off the authorized users in the users table in the database.
 app.post('/login', (req, res) => {
     const sql = "SELECT * FROM `users` WHERE `Username` = ? AND `Password` = ?";
     db.query(sql, [req.body.username, req.body.password], (err, data) => {
@@ -39,6 +40,7 @@ app.post('/login', (req, res) => {
     })
 })
 
+//Creating a new conference in the database via the New-Conference screen
 app.post('/New-Conference', (req, res) => {
     const sql = "INSERT INTO `conferences` (`Conf_Name`, `City`, `State`, `Country`, `Start_Date`, `End_Date`, `Deadline`, `Conf_Chair`) VALUES (?)";
     const values = [
@@ -67,6 +69,7 @@ app.post('/New-Conference', (req, res) => {
     });
 });
 
+//Creating a new paper in the database via the New-Paper Screen
 app.post('/New-Paper', (req, res) => {
     const sql = "INSERT INTO `papers` (`Title`, `Author`, `Status`) VALUES (?)";
     const values = [
@@ -83,9 +86,27 @@ app.post('/New-Paper', (req, res) => {
             });
         }
 
-        return res.status(201).json({
+        return res.status(200).json({
             status: "Success",
             data: data
+        });
+    });
+});
+
+app.get('/Author-Home', (req, res) => {
+    const sql = "SELECT Conf_Name, DATE_FORMAT(Start_Date, '%Y-%m-%d') AS Start_Date, DATE_FORMAT(End_Date, '%Y-%m-%d') AS End_Date FROM conferences WHERE Deadline >= CURDATE()";
+    db.query(sql, (error, conferences) => {
+        if (error) {
+            console.error("Error fetching conferences:", error);
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Success",
+            conferences: conferences
         });
     });
 });

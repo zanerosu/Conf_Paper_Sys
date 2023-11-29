@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useUser } from './UserContext';
+import axios from 'axios';
 
 function Author_Home() {
 
   const {user, logoutUser} = useUser();
-
+  const [conferences, setConferences] = useState([]);
+  
   const navigate = useNavigate();
 
   const handleLogout = () =>{
     logoutUser();
     navigate('/');
   }
+
+  useEffect(() => {
+    axios.get('http://localhost:8081/Author-Home')
+    .then(res => {
+      if (res.data.status === "Success"){
+        setConferences(res.data.conferences);
+      }else{
+        console.error("Error fetching conferences:", res.data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching conferences:", error);
+    });
+  }, []);
 
   return (
     <div className='Home-Page'>
@@ -32,8 +48,16 @@ function Author_Home() {
             <br/>
             Check Paper Status
           </ul>
-
         </div>
+
+      <h2>Conferences:</h2>
+      <ul>
+        {conferences.map(conference => (
+          <li key = {conference.Conf_Name}>
+            <strong>{conference.Conf_Name}</strong> - {conference.Start_Date} to {conference.End_Date}
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
