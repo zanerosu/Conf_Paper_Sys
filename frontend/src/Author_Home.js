@@ -53,9 +53,11 @@ function Author_Home() {
       <h2>Conferences:</h2>
       <ul>
         {conferences.map(conference => (
-          <li key = {conference.Conf_Name}>
-            <strong>{conference.Conf_Name}</strong> - {conference.Start_Date} to {conference.End_Date}
-          </li>
+          <ul key = {conference.Conf_Name} className='Conference_List' onClick={() => navigate('/Home')}>
+            <label>
+              <strong>{conference.Conf_Name}</strong> - {conference.Start_Date} to {conference.End_Date}
+            </label>
+          </ul>
         ))}
       </ul>
     </div>

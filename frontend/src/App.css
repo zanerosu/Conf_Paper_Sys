@@ -86,4 +86,11 @@
     bottom:60px;
   }
 
-  
+  .Conference_List{
+    text-align: left;
+    font-size: 25px;
+  }
+
+  h2{
+    font-family: 'Times New Roman', Times, serif;
+  }
