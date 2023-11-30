@@ -86,11 +86,26 @@
     bottom:60px;
   }
 
+  h2{
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+
   .Conference_List{
     text-align: left;
     font-size: 25px;
+
   }
 
-  h2{
-    font-family: 'Times New Roman', Times, serif;
+  .Conference_List_Conf_Name{
+    display: inline;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+
+  .Conference_List_Dates{
+    display: inline;
+    padding-left: 30%;
+    white-space: nowrap;
+    
   }

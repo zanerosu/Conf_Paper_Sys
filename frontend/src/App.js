@@ -6,10 +6,12 @@ import Author_Home from './Author_Home';
 import Reviewer_Home from './Reviewer_Home';
 import Chair_Home from './Chair_Home';
 import New_Paper from './New_Paper';
+import Conference_Details from './Conference_Details';
 
 import './App.css';
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
           <Route path = '/Reviewer-Home' element = {<Reviewer_Home/>}></Route>
           <Route path = '/Chair-Home' element = {<Chair_Home/>}></Route>
           <Route path = '/New-Paper' element = {<New_Paper/>}></Route>
+          <Route path = '/Conference-Details/:id' element = {<Conference_Details/>}></Route>
         </Routes>
     </BrowserRouter>
     </div>

@@ -53,9 +53,19 @@ function Author_Home() {
       <h2>Conferences:</h2>
       <ul>
         {conferences.map(conference => (
-          <ul key = {conference.Conf_Name} className='Conference_List' onClick={() => navigate('/Home')}>
+          <ul 
+            key = {conference.ConfID} 
+            className='Conference_List' 
+            onClick={() => navigate(`/Conference-Details/${conference.ConfID}`)}>
             <label>
-              <strong>{conference.Conf_Name}</strong> - {conference.Start_Date} to {conference.End_Date}
+              <strong>
+                <div className='Conference_List_Conf_Name'>
+                {conference.Conf_Name} -
+                </div>
+                </strong>
+                <div className='Conference_List_Dates'>
+                   {new Date(conference.Start_Date).toLocaleDateString()} to {new Date(conference.End_Date).toLocaleDateString()}
+                </div>
             </label>
           </ul>
         ))}
@@ -64,4 +74,4 @@ function Author_Home() {
   )
 }
 
-export default Author_Home
+export default Author_Home;

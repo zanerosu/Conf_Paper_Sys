@@ -94,7 +94,7 @@ app.post('/New-Paper', (req, res) => {
 });
 
 app.get('/Author-Home', (req, res) => {
-    const sql = "SELECT Conf_Name, DATE_FORMAT(Start_Date, '%Y-%m-%d') AS Start_Date, DATE_FORMAT(End_Date, '%Y-%m-%d') AS End_Date FROM conferences WHERE Deadline >= CURDATE()";
+    const sql = "SELECT Conf_Name, ConfID, Start_Date, End_Date FROM conferences WHERE Deadline >= CURDATE()";
     db.query(sql, (error, conferences) => {
         if (error) {
             console.error("Error fetching conferences:", error);
@@ -110,3 +110,36 @@ app.get('/Author-Home', (req, res) => {
         });
     });
 });
+
+
+app.get('/Conference-Details/:id', (req, res) =>{
+    const conferenceID = req.params.id;
+
+    const sql = "SELECT * FROM conferences WHERE ConfID = ?";
+
+    db.query(sql, [conferenceID], (error, result) => {
+        if (error) {
+          console.error("Error fetching conference details:", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+    
+        if (result.length === 0) {
+          return res.status(404).json({
+            status: "Error",
+            message: "Conference not found"
+          });
+        }
+    
+        const conference = result[0];
+        return res.status(200).json({
+          status: "Success",
+          conference: conference
+        });
+      });
+});
+
+
+
