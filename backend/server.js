@@ -94,7 +94,9 @@ app.post('/New-Paper', (req, res) => {
     });
 });
 
-app.get('/Author-Home', (req, res) => {
+
+//Retrieves all conferences that still have a valid deadline
+app.get('/Get_Conferences', (req, res) => {
     const sql = "SELECT Conf_Name, ConfID, Start_Date, End_Date FROM conferences WHERE Deadline >= CURDATE()";
     db.query(sql, (error, conferences) => {
         if (error) {
@@ -111,6 +113,27 @@ app.get('/Author-Home', (req, res) => {
         });
     });
 });
+
+//Retrieves all authors 
+app.get('/Get_Authors', (req, res) => {
+    const sql = "SELECT * FROM users WHERE Affiliation = 'Author'";
+    db.query(sql, (error, authors) => {
+        if (error) {
+            console.error("Error fetching authors:", error);
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Success",
+            authors: authors
+        });
+    });
+});
+
+
 
 
 app.get('/Conference-Details/:id', (req, res) =>{

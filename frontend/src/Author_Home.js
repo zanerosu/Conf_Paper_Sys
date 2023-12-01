@@ -7,6 +7,7 @@ function Author_Home() {
 
   const {user, logoutUser} = useUser();
   const [conferences, setConferences] = useState([]);
+
   
   const navigate = useNavigate();
 
@@ -17,7 +18,7 @@ function Author_Home() {
 
   //Gets conference data from database
   useEffect(() => {
-    axios.get('http://localhost:8081/Author-Home')
+    axios.get('http://localhost:8081/Get_Conferences')
     .then(res => {
       if (res.data.status === "Success"){
         setConferences(res.data.conferences);
@@ -29,6 +30,7 @@ function Author_Home() {
       console.error("Error fetching conferences:", error);
     });
   }, []);
+
 
   return (
     <div className='Home-Page'>

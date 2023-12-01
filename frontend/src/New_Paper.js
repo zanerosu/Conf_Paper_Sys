@@ -15,7 +15,7 @@ function New_Paper(){
     //Gets conference data from database
     const [conferences, setConferences] = useState([]);
     useEffect(() => {
-      axios.get('http://localhost:8081/Author-Home')
+      axios.get('http://localhost:8081/Get_Conferences')
       .then(res => {
         if (res.data.status === "Success"){
           setConferences(res.data.conferences);
@@ -28,9 +28,25 @@ function New_Paper(){
       });
     }, []);
 
+    //Gets author data from database
+    const [authors, setAuthors] = useState([]);
+    useEffect(() => {
+      axios.get('http://localhost:8081/Get_Authors')
+      .then(res => {
+        if (res.data.status === "Success"){
+          setAuthors(res.data.authors);
+        }else{
+          console.error("Error fetching authors:", res.data.message);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching authors:", error);
+      });
+    }, []);
+
 
     const handleInput = (event) => {
-        setValues(prev => ({...prev, [event.target.name]: event.target.value}))
+        setValues(prev => ({...prev, [event.target.name]: event.target.value}));
     };
 
     const handleLogout = () =>{
@@ -71,14 +87,26 @@ function New_Paper(){
                         <label htmlFor = 'Title'><strong>Paper Title</strong></label>
                         <input type = 'text' placeholder= 'Enter Title' name = 'Title' className = 'form-control rounded-0' onChange={handleInput}/>
                     </div>
-                
-                    <div className='mb-3'>
-                        <label htlmFor = 'Author'><strong>Author</strong></label>
-                        <input type = 'text' placeholder= 'Enter author username' name = 'Author' className = 'form-control rounded-0' onChange={handleInput}/> 
-                    </div>
+              
+                    {/* Select lists author names */}
+                    <label htmlFor = 'Author'><strong>Author</strong></label>
+                    <select 
+                      className="form-select" 
+                      aria-label="Default select example"
+                      name='Author'
+                      onChange={handleInput}
+                      value={values.Author}
+                      >
+                        <option key = "" value="" disabled>Select Author</option>
+                        {authors.map(author => (
+                          <option key = {author.Username} value = {author.Username}>
+                            {author.Fname} {author.Lname}
+                          </option>
+                        ))}
+                    </select>
                     
                     {/* Select lists conference names */}
-                    <label htlmFor = 'Conference'><strong>Conference</strong></label>
+                    <label htmlFor = 'Conference'><strong>Conference</strong></label>
                     <select 
                       className="form-select" 
                       aria-label="Default select example"
@@ -86,7 +114,7 @@ function New_Paper(){
                       onChange={handleInput}
                       value={values.Conference}
                       >
-                        <option selected>Select Conference</option>
+                        <option key = "" value="" disabled>Select Conference</option>
                         {conferences.map(conference => (
                           <option key = {conference.ConfID} value = {conference.ConfID}>
                             {conference.Conf_Name}
