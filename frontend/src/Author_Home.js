@@ -15,6 +15,7 @@ function Author_Home() {
     navigate('/');
   }
 
+  //Gets conference data from database
   useEffect(() => {
     axios.get('http://localhost:8081/Author-Home')
     .then(res => {
@@ -50,26 +51,20 @@ function Author_Home() {
           </ul>
         </div>
 
-      <h2>Conferences:</h2>
-      <ul>
-        {conferences.map(conference => (
-          <ul 
-            key = {conference.ConfID} 
-            className='Conference_List' 
-            onClick={() => navigate(`/Conference-Details/${conference.ConfID}`)}>
-            <label>
-              <strong>
-                <div className='Conference_List_Conf_Name'>
-                {conference.Conf_Name} -
-                </div>
-                </strong>
-                <div className='Conference_List_Dates'>
-                   {new Date(conference.Start_Date).toLocaleDateString()} to {new Date(conference.End_Date).toLocaleDateString()}
-                </div>
-            </label>
+      <div className='Conference_List'>
+        <h2>Conferences:</h2>
+          <ul> {conferences.map(conference => (
+            <ul key = {conference.ConfID} onClick={() => navigate(`/Conference-Details/${conference.ConfID}`)}>
+              <li>
+                <img src ="Conference_Icon.png" className='Conference_Icons'/>
+                <h3 className='Conference_List_Conf_Name'>{conference.Conf_Name}</h3>
+                <p className='Conference_List_Dates'>{new Date(conference.Start_Date).toLocaleDateString()} to {new Date(conference.End_Date).toLocaleDateString()}</p>
+              </li>
+            </ul>
+            ))}   
           </ul>
-        ))}
-      </ul>
+      </div>
+
     </div>
   )
 }

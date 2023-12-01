@@ -71,11 +71,12 @@ app.post('/New-Conference', (req, res) => {
 
 //Creating a new paper in the database via the New-Paper Screen
 app.post('/New-Paper', (req, res) => {
-    const sql = "INSERT INTO `papers` (`Title`, `Author`, `Status`) VALUES (?)";
+    const sql = "INSERT INTO `papers` (`Title`, `Author`, `Status`, `ConfID`) VALUES (?)";
     const values = [
         req.body.Title,
         req.body.Author,
         req.body.Status,
+        req.body.Conference
     ]
     db.query(sql, [values], (error, data)=>{
         if (error) {

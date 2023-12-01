@@ -26,6 +26,7 @@ function Home() {
               Create Conference
             </label>
           </ul>
+          
           <ul onClick={() => navigate('/Author-Home')} id = "Author_Home">
             <label for = "Author_Home">
               <img src = "Author-Icon.png" alt = "Icon 2"/>
@@ -33,16 +34,23 @@ function Home() {
               Author Home
             </label>
           </ul>
+
           <ul onClick={() => navigate('/Chair-Home')} id = "Chair_Home">
-            <img src = "Conf_Chair-Icon.png" alt = "Icon 3"/>
-            <br/>
-            Chair Home
+            <label for = "Chair_Home">
+              <img src = "Conf_Chair-Icon.png" alt = "Icon 3"/>
+              <br/>
+              Chair Home
+            </label>
           </ul>
+
           <ul onClick={() => navigate('/Reviewer-Home')} id = "Reviewer_Home">
-            <img src = "Reviewer-Icon.png" alt = "Icon 4"/>
-            <br/>
-            Reviewer Home
+            <label for = "Reviewer_Home">
+              <img src = "Reviewer-Icon.png" alt = "Icon 4"/>
+              <br/>
+              Reviewer Home
+            </label>
           </ul>
+
         </div>
     </div>
   )

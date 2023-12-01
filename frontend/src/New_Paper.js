@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from './UserContext';
 import {useNavigate } from 'react-router-dom'
@@ -8,8 +8,26 @@ function New_Paper(){
     const [values, setValues] = useState({
         Title: '',
         Author: '',
-        Status: 'Pending'
+        Status: 'Pending',
+        Conference: '',
     });
+
+    //Gets conference data from database
+    const [conferences, setConferences] = useState([]);
+    useEffect(() => {
+      axios.get('http://localhost:8081/Author-Home')
+      .then(res => {
+        if (res.data.status === "Success"){
+          setConferences(res.data.conferences);
+        }else{
+          console.error("Error fetching conferences:", res.data.message);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching conferences:", error);
+      });
+    }, []);
+
 
     const handleInput = (event) => {
         setValues(prev => ({...prev, [event.target.name]: event.target.value}))
@@ -58,6 +76,23 @@ function New_Paper(){
                         <label htlmFor = 'Author'><strong>Author</strong></label>
                         <input type = 'text' placeholder= 'Enter author username' name = 'Author' className = 'form-control rounded-0' onChange={handleInput}/> 
                     </div>
+                    
+                    {/* Select lists conference names */}
+                    <label htlmFor = 'Conference'><strong>Conference</strong></label>
+                    <select 
+                      className="form-select" 
+                      aria-label="Default select example"
+                      name='Conference'
+                      onChange={handleInput}
+                      value={values.Conference}
+                      >
+                        <option selected>Select Conference</option>
+                        {conferences.map(conference => (
+                          <option key = {conference.ConfID} value = {conference.ConfID}>
+                            {conference.Conf_Name}
+                          </option>
+                        ))}
+                    </select>
 
                     <button type = 'submit' className='btn btn-success w-100'><strong>Upload</strong></button>
                 </form>
