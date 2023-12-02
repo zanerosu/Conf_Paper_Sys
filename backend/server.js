@@ -166,6 +166,67 @@ app.get('/Get_Authors', (req, res) => {
     });
 });
 
+//Retrieves all Papers
+app.get('/Get_Papers', (req, res) => {
+    const sql = "SELECT * FROM papers";
+    db.query(sql, (error, papers) => {
+        if (error) {
+            console.error("Error fetching papers:", error);
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Success",
+            papers: papers
+        });
+    });
+});
+
+//Retrieves all reviewers 
+app.get('/Get_Reviewers', (req, res) => {
+    const sql = "SELECT * FROM users WHERE Affiliation = 'Reviewer'";
+    db.query(sql, (error, reviewers) => {
+        if (error) {
+            console.error("Error fetching Reviewers:", error);
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Success",
+            reviewers: reviewers
+        });
+    });
+});
+
+app.post('/Set_Reviewers', (req, res) => {
+    const { paperID, reviewer1, reviewer2, reviewer3 } = req.body;
+
+    const sql = "UPDATE papers SET Reviewer_1 = ?, Reviewer_2 = ?, Reviewer_3 = ? WHERE PaperID = ?";
+    const values = [reviewer1, reviewer2, reviewer3, paperID];
+
+    db.query(sql, values, (error, result) => {
+        if (error) {
+            console.error("Error updating Reviewers:", error);
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Success",
+            message: "Reviewers updated successfully"
+        });
+    });
+});
+
+
 //Get Conference details based off conference ID
 app.get('/Conference-Details/:id', (req, res) =>{
     const conferenceID = req.params.id;

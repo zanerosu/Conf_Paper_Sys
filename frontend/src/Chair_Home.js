@@ -20,7 +20,7 @@ function Chair_Home() {
       <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
         <h1 className='Page-Header'>Conference Chair Home <img src = "Conf_Chair-Icon.png" className = "Home-Image"/> </h1>
         <div className='Home-List Author_Home'>
-          <ul onClick={() => navigate('/home')} id = "Assign_Reviwers">
+          <ul onClick={() => navigate('/Assign-Reviwers')} id = "Assign_Reviwers">
             <label for = "Assign_Reviewers">
               <img src = "Reviewer-Icon.png" alt = "Icon 1"/>
               <br/>

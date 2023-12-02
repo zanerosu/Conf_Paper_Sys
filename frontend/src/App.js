@@ -8,6 +8,7 @@ import Chair_Home from './Chair_Home';
 import New_Paper from './New_Paper';
 import Conference_Details from './Conference_Details';
 import Paper_Status from './Paper_Status';
+import Assign_Reviewers from './Assign_Reviewers';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path = '/New-Paper' element = {<New_Paper/>}></Route>
           <Route path = '/Conference-Details/:id' element = {<Conference_Details/>}></Route>
           <Route path = '/Paper-Status' element = {<Paper_Status/>}></Route>
+          <Route path = '/Assign-Reviwers' element = {<Assign_Reviewers/>}></Route>
         </Routes>
     </BrowserRouter>
     </div>
