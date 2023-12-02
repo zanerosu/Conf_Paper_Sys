@@ -16,3 +16,8 @@ Project uses XAMPP control panel for database managment
 2. Connect to the frontend folder and run "npm start"
 
 I will be working on a way to use the program as a 'guest' that doesn't need to interact with the database.
+
+## DEV NOTES
+
+12/1/23:
+Finish making Assign_Reviewers Page, reviewers are not being properly assigned in papers table, values remain as NULL.
