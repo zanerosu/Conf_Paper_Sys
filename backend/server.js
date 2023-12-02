@@ -94,7 +94,6 @@ app.post('/New-Paper', (req, res) => {
     });
 });
 
-
 //Retrieves all conferences that still have a valid deadline
 app.get('/Get_Conferences', (req, res) => {
     const sql = "SELECT Conf_Name, ConfID, Start_Date, End_Date FROM conferences WHERE Deadline >= CURDATE()";
@@ -103,7 +102,8 @@ app.get('/Get_Conferences', (req, res) => {
             console.error("Error fetching conferences:", error);
             return res.status(500).json({
                 status: "Error",
-                message: "Internal Server Error"
+                message: "Internal Server Error",
+                error: error.message
             });
         }
 
@@ -112,6 +112,39 @@ app.get('/Get_Conferences', (req, res) => {
             conferences: conferences
         });
     });
+});
+
+//Get a paper status depending on the logged in user
+app.get('/Paper-Status', (req, res) =>{
+    if(!req.query.Username){
+        return res.status(400).json({
+            status: 'Error',
+            message: 'Username is required',
+        })
+    }
+
+    const sql = "SELECT * FROM papers WHERE Author = ?";
+
+    db.query(sql, [req.query.Username], (error, papers) => {
+        if (error) {
+          console.error("Error fetching paper status", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+    
+        if (papers.length === 0) {
+          return res.status(404).json({
+            status: "Error",
+            papers:[]
+          });
+        }
+        return res.status(200).json({
+          status: "Success",
+          papers: papers
+        });
+      });
 });
 
 //Retrieves all authors 
@@ -133,9 +166,7 @@ app.get('/Get_Authors', (req, res) => {
     });
 });
 
-
-
-
+//Get Conference details based off conference ID
 app.get('/Conference-Details/:id', (req, res) =>{
     const conferenceID = req.params.id;
 
@@ -164,6 +195,8 @@ app.get('/Conference-Details/:id', (req, res) =>{
         });
       });
 });
+
+
 
 
 

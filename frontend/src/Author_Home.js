@@ -8,14 +8,12 @@ function Author_Home() {
   const {user, logoutUser} = useUser();
   const [conferences, setConferences] = useState([]);
 
-  
-  const navigate = useNavigate();
-
   const handleLogout = () =>{
     logoutUser();
     navigate('/');
   }
-
+  
+  const navigate = useNavigate();
   //Gets conference data from database
   useEffect(() => {
     axios.get('http://localhost:8081/Get_Conferences')
@@ -38,6 +36,7 @@ function Author_Home() {
       <button type = 'submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
       <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
         <h1 className='Page-Header'>Author Home <img src = "Author-Icon.png" className = "Home-Image"/> </h1>
+
         <div className='Home-List Author_Home'>
           <ul onClick={() => navigate('/New-Paper')} id = "new_paper">
             <label for = "New_Paper">
@@ -46,7 +45,7 @@ function Author_Home() {
               <a>Upload Paper</a>
             </label>
           </ul>
-          <ul>
+          <ul onClick={() => navigate('/Paper-Status')}>
             <img src = "Status_icon.png" alt = "Icon 2"/>
             <br/>
             Check Paper Status

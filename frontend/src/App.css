@@ -107,12 +107,10 @@
 
 /* Author home conference list*/
   .Conference_List{
-    background-color: rgba(0, 0, 0, 0.39);
+    background-color: rgba(0, 0, 0, 0.40);
     border-radius: 30px;
-    padding: 10px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+    margin:0;
+    padding:20px;
   }
   li img{
     float: left; 
@@ -127,8 +125,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    overflow: auto;
     border-radius: 20px;
+    margin: 0;
   }
   li:hover{
     background: rgba(255, 255, 255, 0.39);
@@ -154,4 +152,9 @@
     background-color: rgba(0, 0, 0, 0.39);
     border-radius: 30px;
     padding: 10px;
+  }
+
+  .Paper_Status_Title{
+    width: 100px;
+    text-align: center;
   }

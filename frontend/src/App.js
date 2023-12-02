@@ -7,6 +7,7 @@ import Reviewer_Home from './Reviewer_Home';
 import Chair_Home from './Chair_Home';
 import New_Paper from './New_Paper';
 import Conference_Details from './Conference_Details';
+import Paper_Status from './Paper_Status';
 
 import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path = '/Chair-Home' element = {<Chair_Home/>}></Route>
           <Route path = '/New-Paper' element = {<New_Paper/>}></Route>
           <Route path = '/Conference-Details/:id' element = {<Conference_Details/>}></Route>
+          <Route path = '/Paper-Status' element = {<Paper_Status/>}></Route>
         </Routes>
     </BrowserRouter>
     </div>
