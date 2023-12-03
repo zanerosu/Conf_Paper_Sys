@@ -149,7 +149,7 @@ app.get('/Paper-Status', (req, res) =>{
 
 //Retrieves all authors 
 app.get('/Get_Authors', (req, res) => {
-    const sql = "SELECT * FROM users WHERE Affiliation = 'Author'";
+    const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Author%'";
     db.query(sql, (error, authors) => {
         if (error) {
             console.error("Error fetching authors:", error);
@@ -187,7 +187,7 @@ app.get('/Get_Papers', (req, res) => {
 
 //Retrieves all reviewers 
 app.get('/Get_Reviewers', (req, res) => {
-    const sql = "SELECT * FROM users WHERE Affiliation = 'Reviewer'";
+    const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Reviewer%'";
     db.query(sql, (error, reviewers) => {
         if (error) {
             console.error("Error fetching Reviewers:", error);
@@ -204,15 +204,12 @@ app.get('/Get_Reviewers', (req, res) => {
     });
 });
 
-app.post('/Set_Reviewers', (req, res) => {
-    const { paperID, reviewer1, reviewer2, reviewer3 } = req.body;
-
-    const sql = "UPDATE papers SET Reviewer_1 = ?, Reviewer_2 = ?, Reviewer_3 = ? WHERE PaperID = ?";
-    const values = [reviewer1, reviewer2, reviewer3, paperID];
-
-    db.query(sql, values, (error, result) => {
+//Retrieves all chairs 
+app.get('/Get_Chairs', (req, res) => {
+    const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Chair%'";
+    db.query(sql, (error, chairs) => {
         if (error) {
-            console.error("Error updating Reviewers:", error);
+            console.error("Error fetching Chairs:", error);
             return res.status(500).json({
                 status: "Error",
                 message: "Internal Server Error"
@@ -221,9 +218,43 @@ app.post('/Set_Reviewers', (req, res) => {
 
         return res.status(200).json({
             status: "Success",
-            message: "Reviewers updated successfully"
+            chairs: chairs
         });
     });
+});
+
+app.post('/Set_Reviewers', (req, res) => {
+    const { reviewersData } = req.body;
+
+    const updatePromises = reviewersData.map(({ PaperID, reviewer1, reviewer2, reviewer3 }) => {
+        return new Promise((resolve, reject) => {
+            const sql = "UPDATE papers SET Reviewer_1 = ?, Reviewer_2 = ?, Reviewer_3 = ? WHERE PaperID = ?";
+            const values = [reviewer1, reviewer2, reviewer3, PaperID];
+
+            db.query(sql, values, (error, result) => {
+                if (error) {
+                    console.error("Error updating Reviewers:", error);
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    });
+
+    Promise.all(updatePromises)
+        .then(() => {
+            return res.status(200).json({
+                status: "Success",
+                message: "Reviewers updated successfully"
+            });
+        })
+        .catch(error => {
+            return res.status(500).json({
+                status: "Error",
+                message: "Internal Server Error"
+            });
+        });
 });
 
 

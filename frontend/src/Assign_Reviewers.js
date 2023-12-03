@@ -9,6 +9,7 @@ function Assign_Reviewers() {
   const [papers, setPapers] = useState([]);
   const [selectedReviewers, setSelectedReviewers] = useState({}); // Initialize as an object
   const [reviewers, setReviewers] = useState([]);
+  
 
   const handleLogout = () => {
     logoutUser();
@@ -25,11 +26,21 @@ function Assign_Reviewers() {
     }));
   };
 
+  //Saves reviewers to each paper depending on paperID
   const saveReviewers = () => {
-    axios.post('http://localhost:8081/Set_Reviewers', { selectedReviewers })
+    console.log("Selected Reviewers:", selectedReviewers);
+
+    const reviewersData = Object.keys(selectedReviewers).map(PaperID => ({
+      PaperID,
+      reviewer1: selectedReviewers[PaperID]?.Reviewer_1 || null,
+      reviewer2: selectedReviewers[PaperID]?.Reviewer_2 || null,
+      reviewer3: selectedReviewers[PaperID]?.Reviewer_3 || null,
+    }));
+
+    axios.post('http://localhost:8081/Set_Reviewers', { reviewersData })
       .then(res => {
         if (res.data.status === 'Success') {
-          console.log('Reviewers saved successfully');
+          console.log(res.data.message);
         } else {
           console.error('Error saving reviewers:', res.data.message);
         }
@@ -75,10 +86,10 @@ function Assign_Reviewers() {
       <button type='submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
       <button type='submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
       <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
-      <h1 className='Page-Header'>Author Home <img src="Author-Icon.png" className="Home-Image" /> </h1>
+      <h1 className='Page-Header'>Assign Reviewers <img src="Reviewer-Icon.png" className="Home-Image" /> </h1>
 
-      <div className='Conference_List'>
-        <h2>Conferences:</h2>
+      <div className='Item_Lists'>
+        <h2>Papers:</h2>
         <ul> {papers.map(paper => (
           <ul key={paper.PaperID}>
             <li>

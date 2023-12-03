@@ -52,7 +52,7 @@ function Author_Home() {
           </ul>
         </div>
 
-      <div className='Conference_List'>
+      <div className='Item_Lists'>
         <h2>Conferences:</h2>
           <ul> {conferences.map(conference => (
             <ul key = {conference.ConfID} onClick={() => navigate(`/Conference-Details/${conference.ConfID}`)}>

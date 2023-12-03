@@ -47,7 +47,7 @@ function Paper_Status(){
           <button type = 'submit' className='btn btn-primary btn-home' onClick= {() => navigate('/Home')}><strong>Return Home</strong></button>
           <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
 
-        <div className='Conference_List'>
+        <div className='Item_Lists'>
         <h2>{user.Fname}'s Papers:</h2>
           <ul> {papers.map((paper, index) => (
             <ul key = {index}>
