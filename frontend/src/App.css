@@ -7,7 +7,14 @@
     color: white;
     background-image: url('/public/loginbackground.jpg');
     background-size: cover;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .NavBar_Image{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
   }
 
 /* CSS For header of each page: */
@@ -63,24 +70,21 @@
   /* Standard buttons and logged in user css */
   .btn-logout{
     position: absolute;
-    top: 10px;
+    top: 17px;
     right: 10px;
   }
-  .btn-home{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
+
   .Curr-User{
     position: absolute;
-    top: 15px;
-    right: 200px;
+    top: 25px;
+    right: 150px;
   }
 
 
   /*New-Conference Page Header Adjustment*/
   .New-Conf-Header{
-    top: -20px
+    top: -20px;
+    padding-top: 20%;
   }
 
 
@@ -144,6 +148,13 @@
 
 .form-select{
   margin-bottom: 30px;
+}
+
+.form-select.Reviewer_Dropdown{
+  margin-bottom: 0px;
+  width: fit-content;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
   /*CONFERENCE DETAILS CSS*/

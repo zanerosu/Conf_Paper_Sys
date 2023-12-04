@@ -65,9 +65,6 @@ function New_Conference() {
   
   return (
     <div className='New-Conf-Page'>
-      <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
-      <button type = 'submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
-      <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
         <h1 className='Page-Header New-Conf-Header'>
             Create New Confernce
         </h1>

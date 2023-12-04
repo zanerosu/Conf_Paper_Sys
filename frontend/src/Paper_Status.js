@@ -43,10 +43,7 @@ function Paper_Status(){
 
     return (
         <div className='Home-Page'>
-          <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
-          <button type = 'submit' className='btn btn-primary btn-home' onClick= {() => navigate('/Home')}><strong>Return Home</strong></button>
-          <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
-
+          
         <div className='Item_Lists'>
         <h2>{user.Fname}'s Papers:</h2>
           <ul> {papers.map((paper, index) => (

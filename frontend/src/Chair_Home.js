@@ -15,12 +15,10 @@ function Chair_Home() {
 
   return (
     <div className='Home-Page'>
-      <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
-      <button type = 'submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
-      <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
+      
         <h1 className='Page-Header'>Conference Chair Home <img src = "Conf_Chair-Icon.png" className = "Home-Image"/> </h1>
         <div className='Home-List Author_Home'>
-          <ul onClick={() => navigate('/Assign-Reviwers')} id = "Assign_Reviwers">
+          <ul onClick={() => navigate('/Assign-Reveiwers')} id = "Assign_Reviwers">
             <label for = "Assign_Reviewers">
               <img src = "Reviewer-Icon.png" alt = "Icon 1"/>
               <br/>

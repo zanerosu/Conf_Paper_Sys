@@ -74,9 +74,7 @@ function New_Paper(){
 
       return (
         <div className='New-Paper-Page'>
-          <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
-          <button type = 'submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
-          <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
+          
             <h1 className='Page-Header New-Conf-Header'>
                 Upload New Paper
             </h1>

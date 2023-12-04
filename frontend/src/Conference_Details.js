@@ -38,10 +38,7 @@ function Conference_Details(){
 
     return (
         <div className='Home-Page'>
-          <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
-          <button type = 'submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
-          <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
-
+          
           <h1 className='Page-Header'> {conference.Conf_Name} Details: </h1>
             <div className='Conf_Details'>
                 <p><strong>Start Date:</strong> {new Date(conference.Start_Date).toLocaleDateString()}</p>

@@ -83,9 +83,8 @@ function Assign_Reviewers() {
 
   return (
     <div className='Home-Page'>
-      <button type='submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button>
-      <button type='submit' className='btn btn-primary btn-home' onClick={() => navigate('/Home')}><strong>Return Home</strong></button>
-      <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p>
+      
+      
       <h1 className='Page-Header'>Assign Reviewers <img src="Reviewer-Icon.png" className="Home-Image" /> </h1>
 
       <div className='Item_Lists'>
@@ -98,6 +97,8 @@ function Assign_Reviewers() {
               <p className='Conference_List_Dates'>By: {paper.Author}</p>
 
               <select
+                className="form-select Reviewer_Dropdown" 
+                aria-label="Default select example"
                 value={selectedReviewers[paper.PaperID]?.Reviewer_1 || null}
                 onChange={(e) =>
                   handleReviewerChange(paper.PaperID, 1, e.target.value)
@@ -112,6 +113,8 @@ function Assign_Reviewers() {
               </select>
 
               <select
+              className="form-select Reviewer_Dropdown" 
+              aria-label="Default select example"
                 value={selectedReviewers[paper.PaperID]?.Reviewer_2 || null}
                 onChange={(e) =>
                   handleReviewerChange(paper.PaperID, 2, e.target.value)
@@ -126,6 +129,8 @@ function Assign_Reviewers() {
               </select>
 
               <select
+              className="form-select Reviewer_Dropdown" 
+              aria-label="Default select example"
                 value={selectedReviewers[paper.PaperID]?.Reviewer_3 || null}
                 onChange={(e) =>
                   handleReviewerChange(paper.PaperID, 3, e.target.value)
@@ -143,7 +148,7 @@ function Assign_Reviewers() {
         ))}
         </ul>
         {/* Button to save reviewers */}
-        <button type="button" onClick={saveReviewers}>
+        <button type="button" className='btn btn-success' onClick={saveReviewers}>
           Save Reviewers
         </button>
       </div>
