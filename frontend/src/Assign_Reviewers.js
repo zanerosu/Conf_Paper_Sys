@@ -83,8 +83,6 @@ function Assign_Reviewers() {
 
   return (
     <div className='Home-Page'>
-      
-      
       <h1 className='Page-Header'>Assign Reviewers <img src="Reviewer-Icon.png" className="Home-Image" /> </h1>
 
       <div className='Item_Lists'>

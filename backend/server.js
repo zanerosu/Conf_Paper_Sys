@@ -156,7 +156,7 @@ app.get('/Review-Papers', (req, res) =>{
         })
     }
 
-    const sql = "SELECT * FROM `papers` WHERE Reviewer_1 OR Reviewer_2 OR Reviewer_3 = ?";
+    const sql = "SELECT * FROM `papers` WHERE Reviewer_1 = 'user1' OR Reviewer_2 ='user1' OR Reviewer_3 = ?";
 
     db.query(sql, [req.query.Username], (error, papers) => {
         if (error) {
@@ -217,8 +217,6 @@ app.get('/Get_Papers', (req, res) => {
         });
     });
 });
-
-
 
 //Retrieves all reviewers 
 app.get('/Get_Reviewers', (req, res) => {
@@ -292,6 +290,22 @@ app.post('/Set_Reviewers', (req, res) => {
         });
 });
 
+app.post('/assign-reviewers', async (req, res) => {
+    const { reviewersData } = req.body;
+  
+    try {
+      
+      for (const { PaperID, Username } of reviewersData) {
+        await db.query('INSERT INTO paper_reviews (PaperID, Username) VALUES (?, ?)', [PaperID, Username]);
+      }
+      res.json({ status: 'Success', message: 'Reviewers assigned successfully' });
+    } catch (error) {
+      console.error('Error assigning reviewers:', error);
+      res.status(500).json({ status: 'Error', message: 'Internal Server Error' });
+    }
+  });
+  
+
 
 //Get Conference details based off conference ID
 app.get('/Conference-Details/:id', (req, res) =>{
@@ -352,6 +366,8 @@ app.get('/Paper-Details/:id', (req, res) =>{
         });
       });
 });
+
+
 
 
 

@@ -5,6 +5,7 @@ import axios from 'axios';
 function Paper_Review(){
     const {id} = useParams();
     const [paper, setPaper] = useState(null);
+    const [reviewResponse, setReviewResponse] = useState('');
     
     useEffect(() => {
         console.log(id);
@@ -25,6 +26,8 @@ function Paper_Review(){
         // If conference is null, return loading or handle it accordingly
         return <div>Loading...</div>;
       }
+
+ 
 
     return (
         <div className='Home-Page'>
