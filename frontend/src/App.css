@@ -22,7 +22,7 @@
     font-family:'Times New Roman', Times, serif;
     font-size: 50px;
     position: relative;
-    top: -100px;
+    padding-top: 20%;
     text-align: center;
   }
 
@@ -101,9 +101,8 @@
   /*Author Home specific CSS*/
   .Author_Home{
     position:relative;
-    bottom:60px;
   }
-
+  
   h2{
     font-family: 'Times New Roman', Times, serif;
   }
