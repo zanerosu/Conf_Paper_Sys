@@ -1,4 +1,5 @@
 import React from 'react'
+import AppNavbar from './Navbar';
 import Login from './Login'
 import Home from './Home'
 import New_Conference from './New_Conference';
@@ -9,7 +10,8 @@ import New_Paper from './New_Paper';
 import Conference_Details from './Conference_Details';
 import Paper_Status from './Paper_Status';
 import Assign_Reviewers from './Assign_Reviewers';
-import AppNavbar from './Navbar';
+import Paper_Review from './Paper_Review';
+
 
 
 import './App.css';
@@ -33,7 +35,8 @@ function App() {
             <Route path = '/New-Paper' element = {<New_Paper/>}></Route>
             <Route path = '/Conference-Details/:id' element = {<Conference_Details/>}></Route>
             <Route path = '/Paper-Status' element = {<Paper_Status/>}></Route>
-            <Route path = '/Assign-Reveiwers' element = {<Assign_Reviewers/>}></Route>
+            <Route path = '/Assign-Reviewers' element = {<Assign_Reviewers/>}></Route>
+            <Route path = '/Paper-Review/:id' element = {<Paper_Review/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

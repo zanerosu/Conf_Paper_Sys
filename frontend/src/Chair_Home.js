@@ -15,10 +15,9 @@ function Chair_Home() {
 
   return (
     <div className='Home-Page'>
-      
         <h1 className='Page-Header'>Conference Chair Home <img src = "Conf_Chair-Icon.png" className = "Home-Image"/> </h1>
         <div className='Home-List Author_Home'>
-          <ul onClick={() => navigate('/Assign-Reveiwers')} id = "Assign_Reviwers">
+          <ul onClick={() => navigate('/Assign-Reviewers')} id = "Assign_Reviwers">
             <label for = "Assign_Reviewers">
               <img src = "Reviewer-Icon.png" alt = "Icon 1"/>
               <br/>
@@ -41,7 +40,6 @@ function Chair_Home() {
                 Final <br/>Recommendation
             </label>
           </ul>
-
         </div>
     </div>
   )

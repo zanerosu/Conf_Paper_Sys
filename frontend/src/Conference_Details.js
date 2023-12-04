@@ -9,13 +9,6 @@ function Conference_Details(){
     const {id} = useParams();
     const [conference, setConference] = useState(null);
     
-    const navigate = useNavigate();
-  
-    const handleLogout = () =>{
-      logoutUser();
-      navigate('/');
-    }
-  
     useEffect(() => {
         console.log(id);
       axios.get(`http://localhost:8081/Conference-Details/${id}`)
@@ -40,7 +33,7 @@ function Conference_Details(){
         <div className='Home-Page'>
           
           <h1 className='Page-Header'> {conference.Conf_Name} Details: </h1>
-            <div className='Conf_Details'>
+            <div className='Item_Details'>
                 <p><strong>Start Date:</strong> {new Date(conference.Start_Date).toLocaleDateString()}</p>
                 <p><strong>End Date:</strong> {new Date(conference.End_Date).toLocaleDateString()}</p>
                 <p><strong>Deadline:</strong> {new Date(conference.Deadline).toLocaleDateString()}</p>

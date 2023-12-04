@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
@@ -7,15 +7,25 @@ import { useUser } from './UserContext';
 
 function AppNavbar() {
 
-    const {user, logoutUser} = useUser();
+    const {logoutUser} = useUser();
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const navigate = useNavigate();
+    const { loginUser } = useUser();
     const location = useLocation();
 
     const handleLogout = () =>{
         logoutUser();
+        localStorage.removeItem('user');
         navigate('/');
       }
+
+      useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+          loginUser(storedUser);
+        }
+      }, []);
 
     const isLoginPage = location.pathname === '/';
 
@@ -37,13 +47,8 @@ function AppNavbar() {
         <Nav.Link as={Link} to="/Chair-Home">Chair Home</Nav.Link>
         <Nav.Link as={Link} to="/Reviewer-Home">Reviewer Home</Nav.Link>
         <Nav.Link> <button type = 'submit' className='btn btn-danger btn-logout' onClick={handleLogout}><strong>Log out</strong></button> </Nav.Link>
-        <Nav.Link> <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p> </Nav.Link>
+        <p className='Curr-User'>Logged in as: {user ? user.Fname : 'Guest'}</p> 
       </Nav>
-      
-                
-                    
-                
-           
     </Navbar>
   );
 }

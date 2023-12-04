@@ -4,19 +4,13 @@ import { useUser } from './UserContext';
 import axios from 'axios';
 
 function Paper_Status(){
-
-    const { user, logoutUser } = useUser();
+    const user = JSON.parse(localStorage.getItem('user'));
     const [papers, setPapers] = useState([]);
     const {values, setValues} =useState({
         Author:user.Username,
     })
 
     const navigate = useNavigate();
-
-    const handleLogout = () =>{
-        logoutUser();
-        navigate('/');
-      }
 
     useEffect(() => {
       if (!user || !user.Username) {

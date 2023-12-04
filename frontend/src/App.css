@@ -19,10 +19,9 @@
 
 /* CSS For header of each page: */
   .Page-Header{
-    font-family:'Times New Roman', Times, serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 50px;
     position: relative;
-    padding-top: 20%;
     text-align: center;
   }
 
@@ -44,11 +43,6 @@
   label:hover{
     filter:brightness(75%);
     cursor: pointer;
-  }
-
-  /*Login specific CSS*/
-  .Login-Form{
-    top: -40px;
   }
 
   /*Homepage specific CSS*/
@@ -156,15 +150,32 @@
   margin-left: 10px;
 }
 
-  /*CONFERENCE DETAILS CSS*/
-  .Conf_Details{
+  /*Detail list styling*/
+  .Item_Details{
     font-size: 30px;
     background-color: rgba(0, 0, 0, 0.39);
     border-radius: 30px;
     padding: 10px;
+    max-width: 800px;
   }
 
   .Paper_Status_Title{
     width: 100px;
     text-align: center;
+  }
+
+  .Paper_Content{
+    text-align: left;
+    padding: 5px;
+    font-weight: normal;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+  }
+
+  .btn.btn_reviewer{
+    margin: 10px;
+    width: 160px;
+    height: 65px;
+    font-size: 25px;
+    border: 2px solid black;
   }

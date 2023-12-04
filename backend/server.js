@@ -147,6 +147,39 @@ app.get('/Paper-Status', (req, res) =>{
       });
 });
 
+//Retrieves all papers for a reviewer
+app.get('/Review-Papers', (req, res) =>{
+    if(!req.query.Username){
+        return res.status(400).json({
+            status: 'Error',
+            message: 'Username is required',
+        })
+    }
+
+    const sql = "SELECT * FROM `papers` WHERE Reviewer_1 OR Reviewer_2 OR Reviewer_3 = ?";
+
+    db.query(sql, [req.query.Username], (error, papers) => {
+        if (error) {
+          console.error("Error fetching paper status", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+    
+        if (papers.length === 0) {
+          return res.status(404).json({
+            status: "Error",
+            papers:[]
+          });
+        }
+        return res.status(200).json({
+          status: "Success",
+          papers: papers
+        });
+      });
+});
+
 //Retrieves all authors 
 app.get('/Get_Authors', (req, res) => {
     const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Author%'";
@@ -184,6 +217,8 @@ app.get('/Get_Papers', (req, res) => {
         });
     });
 });
+
+
 
 //Retrieves all reviewers 
 app.get('/Get_Reviewers', (req, res) => {
@@ -288,6 +323,35 @@ app.get('/Conference-Details/:id', (req, res) =>{
       });
 });
 
+//Get Paper details based off paper ID
+app.get('/Paper-Details/:id', (req, res) =>{
+    const PaperID = req.params.id;
+
+    const sql = "SELECT * FROM papers WHERE PaperID = ?";
+
+    db.query(sql, [PaperID], (error, result) => {
+        if (error) {
+          console.error("Error fetching paper details:", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+    
+        if (result.length === 0) {
+          return res.status(404).json({
+            status: "Error",
+            message: "Conference not found"
+          });
+        }
+    
+        const paper = result[0];
+        return res.status(200).json({
+          status: "Success",
+          paper: paper
+        });
+      });
+});
 
 
 

@@ -31,6 +31,7 @@ function Login() {
                 console.log(res.data);
                 if(res.data.status === "Success"){
                     loginUser(res.data.user);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
                     navigate('/home');
                 } else {
                     alert("No account!")
