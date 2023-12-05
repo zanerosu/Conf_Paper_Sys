@@ -7,6 +7,7 @@ function Assign_Reviewers() {
   const [papers, setPapers] = useState([]);
   const [selectedReviewers, setSelectedReviewers] = useState({}); // Initialize as an object
   const [reviewers, setReviewers] = useState([]);
+  const navigate = useNavigate();
 
   const handleReviewerChange = (PaperID, reviewerNumber, selectedReviewer) => {
     setSelectedReviewers((prevReviewers) => ({
@@ -34,6 +35,7 @@ function Assign_Reviewers() {
         if (res.data.status === 'Success') {
           console.log(res.data.message);
           alert("Reviewers Assigned")
+          navigate('/Chair-Home')
         } else {
           console.error('Error saving reviewers:', res.data.message);
         }
@@ -58,7 +60,7 @@ function Assign_Reviewers() {
       });
   }, []);
 
-  const navigate = useNavigate();
+  
   // Gets paper data from the database
   useEffect(() => {
     axios.get('http://localhost:8081/Get_Papers')

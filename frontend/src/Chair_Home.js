@@ -33,7 +33,7 @@ function Chair_Home() {
             </label>
           </ul>
 
-          <ul onClick={() => navigate('/home')} id = "Make_Recommendation">
+          <ul onClick={() => navigate('/Final-Recc')} id = "Make_Recommendation">
             <label>
                 <img src = "Recommend-icon.png" alt = "Icon 2"/>
                 <br/>

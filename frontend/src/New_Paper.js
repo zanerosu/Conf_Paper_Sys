@@ -64,7 +64,7 @@ function New_Paper(){
             console.log(res.data);
             if (res.data.status === "Success"){
               alert("New paper created")
-              navigate('/home')
+              navigate('/Author-Home')
             } else {
               alert("Error uploading paper!")
             }

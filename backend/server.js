@@ -434,7 +434,68 @@ app.post('/Reject-Paper/:id', (req, res) => {
         });
     });
 
-//Get Papers for a certain conference
+
+    //Increment neutral count
+app.post('/Neutral-Paper/:id', (req, res) => {
+  const PaperID = req.params.id;
+  console.log(PaperID)
+  // Fetch the paper from the database
+  const sql = "UPDATE papers SET Neut_Count = Neu_Count + 1 WHERE PaperID = ?"
+
+  db.query(sql, [PaperID], (error, result) => {
+      if (error) {
+          console.error("Error updating paper status details:", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+        return res.status(200).json({
+          status: "Success",
+        });
+      });
+  });
 
 
+//Set paper status to Don't Publish
+app.post('/NoPublish-Paper/:id', (req, res) => {
+  const PaperID = req.params.id;
+  console.log(PaperID)
+  // Fetch the paper from the database
+  const sql = "UPDATE papers SET Status = 'Not Published' WHERE PaperID = ?"
 
+  db.query(sql, [PaperID], (error, result) => {
+      if (error) {
+          console.error("Error updating paper status details:", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+        return res.status(200).json({
+          status: "Success",
+        });
+      });
+  });
+
+
+//Set paper status to Publish
+app.post('/Publish-Paper/:id', (req, res) => {
+  const PaperID = req.params.id;
+  console.log(PaperID)
+  // Fetch the paper from the database
+  const sql = "UPDATE papers SET Status = 'Published' WHERE PaperID = ?"
+
+  db.query(sql, [PaperID], (error, result) => {
+      if (error) {
+          console.error("Error updating paper status details:", error);
+          return res.status(500).json({
+            status: "Error",
+            message: "Internal Server Error"
+          });
+        }
+        return res.status(200).json({
+          status: "Success",
+        });
+      });
+  });

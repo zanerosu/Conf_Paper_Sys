@@ -62,6 +62,22 @@ function Paper_Review(){
           });
       };
       
+      const handleNeutral = () => {
+        // Make an API call to increment the 'App_Count' attribute
+        axios.post(`http://localhost:8081/Neutral-Paper/${id}`)
+          .then(res => {
+            if (res.data.status === "Success") {
+              console.log("Success!")
+              alert("Feedback Recorded!")
+              navigate('/Reviewer-Home')
+            } else {
+              console.error("Error for neutral paper:", res.data.message);
+            }
+          })
+          .catch(error => {
+            console.error("Error for neutral paper:", error);
+          });
+      };
 
     return (
         <div className='Home-Page'>
@@ -73,7 +89,7 @@ function Paper_Review(){
             </div>
 
             <button type = 'submit' className='btn btn-danger btn_reviewer'onClick={handleReject}><strong>Reject</strong></button>
-            <button type = 'submit' className='btn btn-primary btn_reviewer'onClick={handleReject}><strong>Neutral</strong></button>
+            <button type = 'submit' className='btn btn-primary btn_reviewer'onClick={handleNeutral}><strong>Neutral</strong></button>
             <button type = 'submit' className='btn btn-success btn_reviewer' onClick={handleAccept}><strong>Accept</strong></button>
             
 

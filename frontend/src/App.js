@@ -13,6 +13,7 @@ import Assign_Reviewers from './Assign_Reviewers';
 import Paper_Review from './Paper_Review';
 import Assign_Reviewers_Test from './Assign_Reviewers_Test';
 import Review_Progress from './Review_Progress';
+import Final_Recc from './Final_Recc';
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path = '/Assign-Reviewers' element = {<Assign_Reviewers/>}></Route>
             <Route path = '/Paper-Review/:id' element = {<Paper_Review/>}></Route>
             <Route path = '/Review-Progress' element = {<Review_Progress/>}></Route>
+            <Route path = '/Final-Recc' element = {<Final_Recc/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>
