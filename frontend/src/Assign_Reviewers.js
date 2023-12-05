@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUser } from './UserContext';
 import axios from 'axios';
 
 function Assign_Reviewers() {
 
-  const { user, logoutUser } = useUser();
   const [papers, setPapers] = useState([]);
   const [selectedReviewers, setSelectedReviewers] = useState({}); // Initialize as an object
   const [reviewers, setReviewers] = useState([]);
-  
-
-  const handleLogout = () => {
-    logoutUser();
-    navigate('/');
-  }
 
   const handleReviewerChange = (PaperID, reviewerNumber, selectedReviewer) => {
     setSelectedReviewers((prevReviewers) => ({
@@ -41,6 +33,7 @@ function Assign_Reviewers() {
       .then(res => {
         if (res.data.status === 'Success') {
           console.log(res.data.message);
+          alert("Reviewers Assigned")
         } else {
           console.error('Error saving reviewers:', res.data.message);
         }

@@ -24,7 +24,7 @@ function Chair_Home() {
               <a>Assign Reviewers</a>
             </label>
           </ul>
-          <ul onClick={() => navigate('/home')} id = "View_Review_Progress">
+          <ul onClick={() => navigate('/Review-Progress')} id = "View_Review_Progress">
             <label>
                 <img src = "Status_icon.png" alt = "Icon 2"/>
                 <br/>

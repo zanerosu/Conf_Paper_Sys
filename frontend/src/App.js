@@ -11,6 +11,8 @@ import Conference_Details from './Conference_Details';
 import Paper_Status from './Paper_Status';
 import Assign_Reviewers from './Assign_Reviewers';
 import Paper_Review from './Paper_Review';
+import Assign_Reviewers_Test from './Assign_Reviewers_Test';
+import Review_Progress from './Review_Progress';
 
 
 
@@ -37,6 +39,7 @@ function App() {
             <Route path = '/Paper-Status' element = {<Paper_Status/>}></Route>
             <Route path = '/Assign-Reviewers' element = {<Assign_Reviewers/>}></Route>
             <Route path = '/Paper-Review/:id' element = {<Paper_Review/>}></Route>
+            <Route path = '/Review-Progress' element = {<Review_Progress/>}></Route>
           </Routes>
         </BrowserRouter>
       </div>

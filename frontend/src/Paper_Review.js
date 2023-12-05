@@ -6,7 +6,8 @@ function Paper_Review(){
     const {id} = useParams();
     const [paper, setPaper] = useState(null);
     const [reviewResponse, setReviewResponse] = useState('');
-    
+    const navigate = useNavigate();
+
     useEffect(() => {
         console.log(id);
       axios.get(`http://localhost:8081/Paper-Details/${id}`)
@@ -27,7 +28,40 @@ function Paper_Review(){
         return <div>Loading...</div>;
       }
 
- 
+      const handleAccept = () => {
+        // Make an API call to increment the 'App_Count' attribute
+        axios.post(`http://localhost:8081/Accept-Paper/${id}`)
+          .then(res => {
+            if (res.data.status === "Success") {
+              console.log("Success!")
+              alert("Feedback Recorded!")
+              navigate('/Reviewer-Home')
+            } else {
+              console.error("Error accepting paper:", res.data.message);
+            }
+          })
+          .catch(error => {
+            console.error("Error accepting paper:", error);
+          });
+      };
+
+      const handleReject = () => {
+        // Make an API call to increment the 'App_Count' attribute
+        axios.post(`http://localhost:8081/Reject-Paper/${id}`)
+          .then(res => {
+            if (res.data.status === "Success") {
+              console.log("Success!")
+              alert("Feedback Recorded!")
+              navigate('/Reviewer-Home')
+            } else {
+              console.error("Error rejecting paper:", res.data.message);
+            }
+          })
+          .catch(error => {
+            console.error("Error rejecting paper:", error);
+          });
+      };
+      
 
     return (
         <div className='Home-Page'>
@@ -38,9 +72,9 @@ function Paper_Review(){
                 <p className='Paper_Content'>Paper contents would be displayed here if the system allowed for uploading documents.</p>
             </div>
 
-            <button type = 'submit' className='btn btn-danger btn_reviewer'><strong>Reject</strong></button>
-            <button type = 'submit' className='btn btn-primary btn_reviewer'><strong>Neutral</strong></button>
-            <button type = 'submit' className='btn btn-success btn_reviewer'><strong>Accept</strong></button>
+            <button type = 'submit' className='btn btn-danger btn_reviewer'onClick={handleReject}><strong>Reject</strong></button>
+            <button type = 'submit' className='btn btn-primary btn_reviewer'onClick={handleReject}><strong>Neutral</strong></button>
+            <button type = 'submit' className='btn btn-success btn_reviewer' onClick={handleAccept}><strong>Accept</strong></button>
             
 
         </div>

@@ -147,8 +147,9 @@ app.get('/Paper-Status', (req, res) =>{
       });
 });
 
-//Retrieves all papers for a reviewer
-app.get('/Review-Papers', (req, res) =>{
+
+//Get a paper status depending on the logged in user
+app.get('/Paper-Status-Conference', (req, res) =>{
     if(!req.query.Username){
         return res.status(400).json({
             status: 'Error',
@@ -156,7 +157,7 @@ app.get('/Review-Papers', (req, res) =>{
         })
     }
 
-    const sql = "SELECT * FROM `papers` WHERE Reviewer_1 = 'user1' OR Reviewer_2 ='user1' OR Reviewer_3 = ?";
+    const sql = "SELECT * FROM papers JOIN conferences ON papers.ConfID = conferences.ConfID WHERE conferences.Conf_Chair = ?;";
 
     db.query(sql, [req.query.Username], (error, papers) => {
         if (error) {
@@ -180,6 +181,43 @@ app.get('/Review-Papers', (req, res) =>{
       });
 });
 
+//Retrieves all papers for a reviewer
+app.get('/Review-Papers', (req, res) => {
+    if (!req.query.Username) {
+      return res.status(400).json({
+        status: 'Error',
+        message: 'Username is required',
+      });
+    }
+    
+    const sql = "SELECT * FROM papers WHERE (Reviewer_1 = ? OR Reviewer_2 = ? OR Reviewer_3 = ?) AND (App_Count + Rej_Count) < 3";
+    const params = [req.query.Username, req.query.Username, req.query.Username];
+  
+    db.query(sql, [...params], (error, papers) => {
+      if (error) {
+        console.error("Error fetching paper status", error);
+        return res.status(500).json({
+          status: "Error",
+          message: "Internal Server Error"
+        });
+      }
+  
+      const [firstPaper] = papers;
+  
+      if (!firstPaper) {
+        return res.status(200).json({
+          status: "Success",
+          papers: []
+        });
+      }
+  
+      return res.status(200).json({
+        status: "Success",
+        papers: papers
+      });
+    });
+  });
+
 //Retrieves all authors 
 app.get('/Get_Authors', (req, res) => {
     const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Author%'";
@@ -199,7 +237,7 @@ app.get('/Get_Authors', (req, res) => {
     });
 });
 
-//Retrieves all Papers
+//Retrieves all Papers from conf
 app.get('/Get_Papers', (req, res) => {
     const sql = "SELECT * FROM papers";
     db.query(sql, (error, papers) => {
@@ -290,22 +328,6 @@ app.post('/Set_Reviewers', (req, res) => {
         });
 });
 
-app.post('/assign-reviewers', async (req, res) => {
-    const { reviewersData } = req.body;
-  
-    try {
-      
-      for (const { PaperID, Username } of reviewersData) {
-        await db.query('INSERT INTO paper_reviews (PaperID, Username) VALUES (?, ?)', [PaperID, Username]);
-      }
-      res.json({ status: 'Success', message: 'Reviewers assigned successfully' });
-    } catch (error) {
-      console.error('Error assigning reviewers:', error);
-      res.status(500).json({ status: 'Error', message: 'Internal Server Error' });
-    }
-  });
-  
-
 
 //Get Conference details based off conference ID
 app.get('/Conference-Details/:id', (req, res) =>{
@@ -369,6 +391,50 @@ app.get('/Paper-Details/:id', (req, res) =>{
 
 
 
+//Increment accept count
+app.post('/Accept-Paper/:id', (req, res) => {
+    const PaperID = req.params.id;
+    console.log(PaperID)
+    // Fetch the paper from the database
+    const sql = "UPDATE papers SET App_Count = App_Count + 1 WHERE PaperID = ?"
+
+    db.query(sql, [PaperID], (error, result) => {
+        if (error) {
+            console.error("Error updating paper status details:", error);
+            return res.status(500).json({
+              status: "Error",
+              message: "Internal Server Error"
+            });
+          }
+          return res.status(200).json({
+            status: "Success",
+          });
+        });
+    });
+
+
+//Increment reject count
+app.post('/Reject-Paper/:id', (req, res) => {
+    const PaperID = req.params.id;
+    console.log(PaperID)
+    // Fetch the paper from the database
+    const sql = "UPDATE papers SET Rej_Count = Rej_Count + 1 WHERE PaperID = ?"
+
+    db.query(sql, [PaperID], (error, result) => {
+        if (error) {
+            console.error("Error updating paper status details:", error);
+            return res.status(500).json({
+              status: "Error",
+              message: "Internal Server Error"
+            });
+          }
+          return res.status(200).json({
+            status: "Success",
+          });
+        });
+    });
+
+//Get Papers for a certain conference
 
 
 
