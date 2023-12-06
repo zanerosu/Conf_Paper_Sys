@@ -1,17 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUser } from './UserContext';
 
 function Chair_Home() {
-
-  const {user, logoutUser} = useUser();
-
   const navigate = useNavigate();
-
-  const handleLogout = () =>{
-    logoutUser();
-    navigate('/');
-  }
 
   return (
     <div className='Home-Page'>

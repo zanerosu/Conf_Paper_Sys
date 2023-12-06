@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUser } from './UserContext';
+import { useParams } from 'react-router-dom'
 import axios from 'axios';
 
 function Conference_Details(){
-
-    const {user, logoutUser} = useUser();
     const {id} = useParams();
     const [conference, setConference] = useState(null);
     
+    //Effect hook to get conference details based off the id of the currently selected conference
     useEffect(() => {
         console.log(id);
       axios.get(`http://localhost:8081/Conference-Details/${id}`)
@@ -29,6 +27,7 @@ function Conference_Details(){
         return <div>Loading...</div>;
       }
 
+    //JSX render of conference details
     return (
         <div className='Home-Page'>
           

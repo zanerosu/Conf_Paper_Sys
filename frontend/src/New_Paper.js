@@ -4,7 +4,7 @@ import { useUser } from './UserContext';
 import {useNavigate } from 'react-router-dom'
 
 function New_Paper(){
-    const {user, logoutUser} = useUser();
+    const {logoutUser} = useUser();
     const [values, setValues] = useState({
         Title: '',
         Author: '',

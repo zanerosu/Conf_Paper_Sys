@@ -9,6 +9,7 @@ function Assign_Reviewers() {
   const [reviewers, setReviewers] = useState([]);
   const navigate = useNavigate();
 
+  //Function to handle changes in selected reviewers
   const handleReviewerChange = (PaperID, reviewerNumber, selectedReviewer) => {
     setSelectedReviewers((prevReviewers) => ({
       ...prevReviewers,
@@ -45,7 +46,7 @@ function Assign_Reviewers() {
       });
   };
 
-  // Gets Reviewers
+  //Effect hook that gets Reviewers from database
   useEffect(() => {
     axios.get('http://localhost:8081/Get_Reviewers')
       .then(res => {
@@ -61,7 +62,7 @@ function Assign_Reviewers() {
   }, []);
 
   
-  // Gets paper data from the database
+  //Effect hook that gets paper data from the database
   useEffect(() => {
     axios.get('http://localhost:8081/Get_Papers')
       .then(res => {
@@ -76,6 +77,7 @@ function Assign_Reviewers() {
       });
   }, []);
 
+  //Render the component JSX
   return (
     <div className='Home-Page'>
       <h1 className='Page-Header'>Assign Reviewers <img src="Reviewer-Icon.png" className="Home-Image" /> </h1>

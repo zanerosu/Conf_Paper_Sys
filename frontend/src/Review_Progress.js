@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUser } from './UserContext';
+
 import axios from 'axios';
 
 function Review_Progress(){
+    //Get user info from local storage
     const user = JSON.parse(localStorage.getItem('user'));
+
+    //State to hold papers
     const [papers, setPapers] = useState([]);
-    const {values, setValues} =useState({
-        Author:user.Username,
-    })
 
-    const navigate = useNavigate();
-
+    //Effect hook to get paper data when the component mounts or the user changes
     useEffect(() => {
+      //Check for user
       if (!user || !user.Username) {
         return;
       }
+      //API Request to fetch paper data bsed on the user's username 
       axios.get(`http://localhost:8081/Paper-Status-Conference?Username=${user.Username}`)
         .then(res => {
           if (res.data.status === 'Success') {
@@ -29,10 +29,12 @@ function Review_Progress(){
         });
     }, [user.Username]);
   
+    //Display loading while getting paper data
     if (!papers) {
       return <div>Loading...</div>;
     }
 
+    //Process papers to group them by conference
     const papersByConference = papers.reduce((acc, paper) => {
       if (!acc[paper.Conf_Name]) {
           acc[paper.Conf_Name] = [];
@@ -40,9 +42,6 @@ function Review_Progress(){
       acc[paper.Conf_Name].push(paper);
       return acc;
   }, {});
-
-
-    console.log(papers)
     
     return (
       <div className='Home-Page'>

@@ -7,24 +7,30 @@ import { useUser } from './UserContext';
 
 
 function Login() {
+    //State for form values and errors
     const [values, setValues] = useState({
         username: '',
         password: '' 
     })
 
+    //Hook for navigation
     const navigate = useNavigate();
     const { loginUser } = useUser();
     const [errors, setErrors] = useState({})
 
+    //Handles input changes in the form
     const handleInput = (event) => {
         setValues(prev => ({...prev, [event.target.name]: event.target.value}))
         setErrors(Validation({ ...values, [event.target.name]: event.target.value }));
     }
 
+    //Handles when the form is submitted
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values));
         console.log(values);
+        
+        //If there are no validation errors proceed with login request
         if (errors.username === "" && errors.password === ""){
             axios.post('http://localhost:8081/login', values)
             .then(res => {
@@ -37,6 +43,7 @@ function Login() {
                     alert("No account!")
                 }
             })
+            //Displays any potential error under the field 
             .catch(err => console.log(err));
         }
     }

@@ -1,3 +1,4 @@
+//Imports all the components
 import React from 'react'
 import AppNavbar from './Navbar';
 import Login from './Login'
@@ -15,14 +16,11 @@ import Assign_Reviewers_Test from './Assign_Reviewers_Test';
 import Review_Progress from './Review_Progress';
 import Final_Recc from './Final_Recc';
 
-
-
-import './App.css';
+import './App.css'; //Imports the stylesheet
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
-
-
+//Main app component function
 function App() {
   return (
     <div className = 'App'>

@@ -8,6 +8,8 @@ import { useUser } from './UserContext';
 function AppNavbar() {
 
     const {logoutUser} = useUser();
+
+    //Saves user to local storage so that the state remains even if the user refreshes the browser
     const user = JSON.parse(localStorage.getItem('user'));
 
     const navigate = useNavigate();
@@ -33,6 +35,7 @@ function AppNavbar() {
       return null;
     }
 
+  //JSX for navbar which is created using bootstrap
   return (
     <Navbar bg="dark" variant="dark" fixed = "top">
       <Navbar.Brand as={Link} to="/home" className='d-flex align-items-center'>

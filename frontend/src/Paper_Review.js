@@ -5,7 +5,6 @@ import axios from 'axios';
 function Paper_Review(){
     const {id} = useParams();
     const [paper, setPaper] = useState(null);
-    const [reviewResponse, setReviewResponse] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {

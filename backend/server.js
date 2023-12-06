@@ -148,7 +148,7 @@ app.get('/Paper-Status', (req, res) =>{
 });
 
 
-//Get a paper status depending on the logged in user
+//Get a paper status for a conference depending on the logged in user
 app.get('/Paper-Status-Conference', (req, res) =>{
     if(!req.query.Username){
         return res.status(400).json({
@@ -156,7 +156,8 @@ app.get('/Paper-Status-Conference', (req, res) =>{
             message: 'Username is required',
         })
     }
-
+    
+    //Query uses a join to find the paper based off of the logged in users username 
     const sql = "SELECT * FROM papers JOIN conferences ON papers.ConfID = conferences.ConfID WHERE conferences.Conf_Chair = ?;";
 
     db.query(sql, [req.query.Username], (error, papers) => {
@@ -181,7 +182,7 @@ app.get('/Paper-Status-Conference', (req, res) =>{
       });
 });
 
-//Retrieves all papers for a reviewer
+//Retrieves all Papers for a Reviewer
 app.get('/Review-Papers', (req, res) => {
     if (!req.query.Username) {
       return res.status(400).json({
@@ -190,6 +191,7 @@ app.get('/Review-Papers', (req, res) => {
       });
     }
     
+    //Query ensures that the paper has less than 3 reviews (Meaning it has not been reviewd by all reviewers yet)
     const sql = "SELECT * FROM papers WHERE (Reviewer_1 = ? OR Reviewer_2 = ? OR Reviewer_3 = ?) AND (App_Count + Rej_Count) < 3";
     const params = [req.query.Username, req.query.Username, req.query.Username];
   
@@ -218,7 +220,7 @@ app.get('/Review-Papers', (req, res) => {
     });
   });
 
-//Retrieves all authors 
+//Retrieves all Authors 
 app.get('/Get_Authors', (req, res) => {
     const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Author%'";
     db.query(sql, (error, authors) => {
@@ -237,7 +239,7 @@ app.get('/Get_Authors', (req, res) => {
     });
 });
 
-//Retrieves all Papers from conf
+//Retrieves all Papers
 app.get('/Get_Papers', (req, res) => {
     const sql = "SELECT * FROM papers";
     db.query(sql, (error, papers) => {
@@ -256,7 +258,7 @@ app.get('/Get_Papers', (req, res) => {
     });
 });
 
-//Retrieves all reviewers 
+//Retrieves all Reviewers 
 app.get('/Get_Reviewers', (req, res) => {
     const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Reviewer%'";
     db.query(sql, (error, reviewers) => {
@@ -275,7 +277,7 @@ app.get('/Get_Reviewers', (req, res) => {
     });
 });
 
-//Retrieves all chairs 
+//Retrieves all Chairs 
 app.get('/Get_Chairs', (req, res) => {
     const sql = "SELECT * FROM users WHERE Affiliation LIKE '%Chair%'";
     db.query(sql, (error, chairs) => {
@@ -294,11 +296,16 @@ app.get('/Get_Chairs', (req, res) => {
     });
 });
 
+//Set reviewers based off the paperID
 app.post('/Set_Reviewers', (req, res) => {
+    //Destructure reviewersData from the requeste body
     const { reviewersData } = req.body;
 
+    //Create array of promises for updating reviewers for each paper 
     const updatePromises = reviewersData.map(({ PaperID, reviewer1, reviewer2, reviewer3 }) => {
         return new Promise((resolve, reject) => {
+
+            //Query that updates reviewers for a specific paper based of the PaperID
             const sql = "UPDATE papers SET Reviewer_1 = ?, Reviewer_2 = ?, Reviewer_3 = ? WHERE PaperID = ?";
             const values = [reviewer1, reviewer2, reviewer3, PaperID];
 
@@ -313,6 +320,7 @@ app.post('/Set_Reviewers', (req, res) => {
         });
     });
 
+    //Use Promise.all to wait for all update promises 
     Promise.all(updatePromises)
         .then(() => {
             return res.status(200).json({
@@ -389,8 +397,6 @@ app.get('/Paper-Details/:id', (req, res) =>{
       });
 });
 
-
-
 //Increment accept count
 app.post('/Accept-Paper/:id', (req, res) => {
     const PaperID = req.params.id;
@@ -411,7 +417,6 @@ app.post('/Accept-Paper/:id', (req, res) => {
           });
         });
     });
-
 
 //Increment reject count
 app.post('/Reject-Paper/:id', (req, res) => {
@@ -435,11 +440,10 @@ app.post('/Reject-Paper/:id', (req, res) => {
     });
 
 
-    //Increment neutral count
+//Increment neutral count
 app.post('/Neutral-Paper/:id', (req, res) => {
   const PaperID = req.params.id;
   console.log(PaperID)
-  // Fetch the paper from the database
   const sql = "UPDATE papers SET Neut_Count = Neu_Count + 1 WHERE PaperID = ?"
 
   db.query(sql, [PaperID], (error, result) => {
@@ -457,11 +461,9 @@ app.post('/Neutral-Paper/:id', (req, res) => {
   });
 
 
-//Set paper status to Don't Publish
+//Set paper status to Not Published
 app.post('/NoPublish-Paper/:id', (req, res) => {
   const PaperID = req.params.id;
-  console.log(PaperID)
-  // Fetch the paper from the database
   const sql = "UPDATE papers SET Status = 'Not Published' WHERE PaperID = ?"
 
   db.query(sql, [PaperID], (error, result) => {
@@ -482,8 +484,6 @@ app.post('/NoPublish-Paper/:id', (req, res) => {
 //Set paper status to Publish
 app.post('/Publish-Paper/:id', (req, res) => {
   const PaperID = req.params.id;
-  console.log(PaperID)
-  // Fetch the paper from the database
   const sql = "UPDATE papers SET Status = 'Published' WHERE PaperID = ?"
 
   db.query(sql, [PaperID], (error, result) => {

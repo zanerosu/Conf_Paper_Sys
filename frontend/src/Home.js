@@ -4,15 +4,11 @@ import { useUser } from './UserContext';
 
 function Home() {
 
-  const {user, logoutUser} = useUser();
+  const {user} = useUser();
 
   const navigate = useNavigate();
 
-  const handleLogout = () =>{
-    logoutUser();
-    navigate('/');
-  }
-
+  //JSX that renders the component
   return (
     <div className='Home-Page'>
         <h1 className='Page-Header'>Welcome, {user ? user.Fname : 'Guest'}</h1>

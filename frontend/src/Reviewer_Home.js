@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUser } from './UserContext';
 import axios from 'axios';
 
 function Reviewer_Home() {
-
+  //Get user info from localStorage
   const user = JSON.parse(localStorage.getItem('user'));
+
+  //State to hold assigned papers
   const [papers, setPapers] = useState([]);
-    const {values, setValues} =useState({
-        Reviewer:user.Username,
-    })
 
+  //Hook to navigate
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (!user || !user.Username) {
       return; // Don't proceed if user information is not available
     }
-
+    
+    //Get assigned papers based on the user's username
     axios.get(`http://localhost:8081/Review-Papers?Username=${user.Username}`)
       .then(res => {
         if (res.data.status === 'Success') {

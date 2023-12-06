@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
-import { useUser } from './UserContext';
 import axios from 'axios';
 
 function Final_Recc(){
     const user = JSON.parse(localStorage.getItem('user'));
     const [papers, setPapers] = useState([]);
-    const {values, setValues} =useState({
-        Author:user.Username,
-    })
 
+    //Hook for navigating to different pages
     const navigate = useNavigate();
 
+    //Get papers based on user's username
     useEffect(() => {
       if (!user || !user.Username) {
         return;
@@ -29,17 +27,19 @@ function Final_Recc(){
         });
     }, [user.Username]);
   
+    //If the papers are fetched, display loading message
     if (!papers) {
       return <div>Loading...</div>;
     }
 
+    //Organize the papers by conference
     const papersByConference = papers.reduce((acc, paper) => {
       if (!acc[paper.Conf_Name]) {
           acc[paper.Conf_Name] = [];
       }
       acc[paper.Conf_Name].push(paper);
       return acc;
-  }, {});
+    }, {});
 
   const handleNoPublish = (PaperID) => {
     // Make an API call to increment the 'App_Count' attribute
@@ -58,7 +58,6 @@ function Final_Recc(){
       });
   };
 
-
   const handlePublish = (PaperID) => {
     // Make an API call to increment the 'App_Count' attribute
     console.log(PaperID)
@@ -75,8 +74,9 @@ function Final_Recc(){
       .catch(error => {
         console.error("Error for paper decision:", error);
       });
-  };
-    
+    };
+
+    //Render the component
     return (
       <div className='Home-Page'>
           <div className='Item_Lists'>
@@ -103,6 +103,7 @@ function Final_Recc(){
   );
 }
 
+//Determines recommendation based on counts
 function getRecommendation(appCount, rejCount, neuCount) {
     if (appCount === 3) {
         return 'Publish';

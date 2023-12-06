@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useUser } from './UserContext';
 import {useNavigate } from 'react-router-dom'
 
-
 function New_Conference() {
-  const {user, logoutUser} = useUser();
-
-
+  
   const [values, setValues] = useState({
     Conf_Name: '',
     City: '',
@@ -21,11 +17,6 @@ function New_Conference() {
 
   const handleInput = (event) => {
     setValues(prev => ({...prev, [event.target.name]: event.target.value}))
-  };
-
-  const handleLogout = () =>{
-    logoutUser();
-    navigate('/');
   };
 
   const navigate = useNavigate();

@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { useUser } from './UserContext';
 import axios from 'axios';
 
 function Author_Home() {
-
-  const {user, logoutUser} = useUser();
   const [conferences, setConferences] = useState([]);
-
-  const handleLogout = () =>{
-    logoutUser();
-    navigate('/');
-  }
   
   const navigate = useNavigate();
   //Gets conference data from database
@@ -32,7 +24,6 @@ function Author_Home() {
 
   return (
     <div className='Home-Page'>
-      
         <h1 className='Page-Header'>Author Home <img src = "Author-Icon.png" className = "Home-Image"/> </h1>
 
         <div className='Home-List Author_Home'>

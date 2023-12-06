@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'
-import { useUser } from './UserContext';
 import axios from 'axios';
 
 function Paper_Status(){
     const user = JSON.parse(localStorage.getItem('user'));
     const [papers, setPapers] = useState([]);
-    const {values, setValues} =useState({
-        Author:user.Username,
-    })
-
-    const navigate = useNavigate();
 
     useEffect(() => {
       if (!user || !user.Username) {
@@ -30,6 +23,7 @@ function Paper_Status(){
         });
     }, [user.Username]);
   
+    //While getting papers display loading
     if (!papers) {
       return <div>Loading...</div>;
     }
