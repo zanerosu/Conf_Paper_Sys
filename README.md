@@ -21,3 +21,6 @@ I will be working on a way to use the program as a 'guest' that doesn't need to 
 
 12/1/23:
 Finish making Assign_Reviewers Page, reviewers are not being properly assigned in papers table, values remain as NULL.
+
+12/6/23:
+Deadline for project has now passed, video to go over project implementation will be linked
