@@ -24,3 +24,5 @@ Finish making Assign_Reviewers Page, reviewers are not being properly assigned i
 
 12/6/23:
 Deadline for project has now passed, video to go over project implementation will be linked
+
+Link to video demonstration of the system in use: https://www.youtube.com/watch?v=54-GVcsoyQI
