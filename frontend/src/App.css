@@ -108,6 +108,12 @@
     margin:0;
     padding:20px;
   }
+  
+  .ItemList_UL{
+    list-style: none;
+    padding: 0;
+  }
+
   li img{
     float: left; 
     width: 60px;
@@ -123,6 +129,7 @@
     padding: 10px;
     border-radius: 20px;
     margin: 0;
+    list-style: none;
   }
   li:hover{
     background: rgba(255, 255, 255, 0.39);

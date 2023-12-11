@@ -49,9 +49,9 @@ function Review_Progress(){
               {Object.entries(papersByConference).map(([conference, papers]) => (
                   <div key={conference}>
                       <h2>{conference} Papers:</h2>
-                      <ul>
+                      <ul class="ItemList_UL">
                           {papers.map((paper, index) => (
-                              <ul key={index}>
+                              <ul class="ItemList_UL"key={index}>
                                   <li>
                                       <img src="Paper icon.png" className='Conference_Icons' alt='Paper Icon' />
                                       <h3 className='Conference_List_Conf_Name'>{paper.Title}</h3>

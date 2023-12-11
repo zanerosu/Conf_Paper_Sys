@@ -43,8 +43,8 @@ function Author_Home() {
 
       <div className='Item_Lists'>
         <h2>Conferences:</h2>
-          <ul> {conferences.map(conference => (
-            <ul key = {conference.ConfID} onClick={() => navigate(`/Conference-Details/${conference.ConfID}`)}>
+          <ul class="ItemList_UL"> {conferences.map(conference => (
+            <ul class="ItemList_UL" key = {conference.ConfID} onClick={() => navigate(`/Conference-Details/${conference.ConfID}`)}>
               <li>
                 <img src ="Conference_Icon.png" className='Conference_Icons'/>
                 <h3 className='Conference_List_Conf_Name'>{conference.Conf_Name}</h3>

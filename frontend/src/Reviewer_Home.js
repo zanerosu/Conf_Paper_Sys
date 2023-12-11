@@ -42,8 +42,8 @@ function Reviewer_Home() {
         <h1 className='Page-Header'>Reviewer Home <img src = "Reviewer-Icon.png" className = "Home-Image"/> </h1>
         <div className='Item_Lists'>
         <h2>{user.Fname}'s Assigned Papers:</h2>
-          <ul> {papers.map((paper, paperID) => (
-            <ul key = {paperID} onClick={() => navigate(`/Paper-Review/${paper.PaperID}`)}>
+          <ul class="ItemList_UL"> {papers.map((paper, paperID) => (
+            <ul class="ItemList_UL" key = {paperID} onClick={() => navigate(`/Paper-Review/${paper.PaperID}`)}>
               <li>
                 <img src ="Review-Paper_Icon.png" className='Conference_Icons'/>
                 <h3 className='Conference_List_Conf_Name'>{paper.Title}</h3>

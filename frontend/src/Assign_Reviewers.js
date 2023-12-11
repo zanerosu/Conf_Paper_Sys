@@ -84,8 +84,8 @@ function Assign_Reviewers() {
 
       <div className='Item_Lists'>
         <h2>Papers:</h2>
-        <ul> {papers.map(paper => (
-          <ul key={paper.PaperID}>
+        <ul class="ItemList_UL"> {papers.map(paper => (
+          <ul class="ItemList_UL" key={paper.PaperID}>
             <li>
               <img src="Paper icon.png" className='Conference_Icons' />
               <h3 className='Conference_List_Conf_Name'>{paper.Title}</h3>

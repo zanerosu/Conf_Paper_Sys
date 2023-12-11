@@ -34,8 +34,8 @@ function Paper_Status(){
           
         <div className='Item_Lists'>
         <h2>{user.Fname}'s Papers:</h2>
-          <ul> {papers.map((paper, index) => (
-            <ul key = {index}>
+          <ul class="ItemList_UL"> {papers.map((paper, index) => (
+            <ul class="ItemList_UL" key = {index}>
               <li>
                 <img src ="Paper icon.png" className='Conference_Icons'/>
                 <h3 className='Conference_List_Conf_Name'>{paper.Title}</h3>
