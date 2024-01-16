@@ -1,46 +1,61 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import Validation from './LoginValidation';
 import axios from 'axios';
+import { useUser } from './UserContext';
 
 
 
 function Login() {
+    //State for form values and errors
     const [values, setValues] = useState({
         username: '',
         password: '' 
     })
 
+    //Hook for navigation
     const navigate = useNavigate();
+    const { loginUser } = useUser();
     const [errors, setErrors] = useState({})
 
+    //Handles input changes in the form
     const handleInput = (event) => {
         setValues(prev => ({...prev, [event.target.name]: event.target.value}))
         setErrors(Validation({ ...values, [event.target.name]: event.target.value }));
     }
 
+    //Handles when the form is submitted
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values));
         console.log(values);
+        
+        //If there are no validation errors proceed with login request
         if (errors.username === "" && errors.password === ""){
             axios.post('http://localhost:8081/login', values)
             .then(res => {
                 console.log(res.data);
-                if(res.data === "Success"){
+                if(res.data.status === "Success"){
+                    loginUser(res.data.user);
+                    localStorage.setItem('user', JSON.stringify(res.data.user));
                     navigate('/home');
                 } else {
                     alert("No account!")
                 }
             })
+            //Displays any potential error under the field 
             .catch(err => console.log(err));
         }
     }
 
   return (
-    <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
-        <div className='bg-white p-3 rounded w-25'>
-            <h1 className='container text-center'>Login</h1>
+    <div className='Login-Page'>
+        <h1 className='Page-Header'>
+            Conference Paper <br/>
+            Review System
+        </h1>
+        <div className='Form-Background Login-Form'>
+            <h1>Login</h1>
             <form action = "" onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlfor = 'username'><strong>Username</strong></label>

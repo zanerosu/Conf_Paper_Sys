@@ -1,0 +1,195 @@
+.App {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    min-height: 100vh;
+    color: white;
+    background-image: url('/public/loginbackground.jpg');
+    background-size: cover;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .NavBar_Image{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+  }
+
+/* CSS For header of each page: */
+  .Page-Header{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 50px;
+    position: relative;
+    text-align: center;
+  }
+
+  /*General Form CSS*/
+  .Form-Background{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.39);
+    padding: 20px;
+    border-radius: 30px;
+    position: relative;
+  }
+
+  /*Hover properties general CSS*/
+  img:hover{
+    filter:brightness(75%);
+    cursor: pointer;
+  }
+  label:hover{
+    filter:brightness(75%);
+    cursor: pointer;
+  }
+
+  /*Homepage specific CSS*/
+  .Home-List{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 22px;
+    justify-content: center; 
+  }
+  .Home-List img{
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+
+  /* Standard buttons and logged in user css */
+  .btn-logout{
+    position: absolute;
+    top: 17px;
+    right: 10px;
+  }
+
+  .Curr-User{
+    position: absolute;
+    top: 25px;
+    right: 150px;
+  }
+
+
+  /*New-Conference Page Header Adjustment*/
+  .New-Conf-Header{
+    top: -20px;
+    padding-top: 20%;
+  }
+
+
+  /*Home Image picture for different users*/
+  .Home-Image{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    bottom: 40px;
+    left: 20px
+  }
+
+
+  /*Author Home specific CSS*/
+  .Author_Home{
+    position:relative;
+  }
+  
+  h2{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+/* Author home conference list*/
+  .Item_Lists{
+    background-color: rgba(0, 0, 0, 0.40);
+    border-radius: 30px;
+    margin:0;
+    padding:20px;
+  }
+  
+  .ItemList_UL{
+    list-style: none;
+    padding: 0;
+  }
+
+  li img{
+    float: left; 
+    width: 60px;
+    height: 60px;
+  }
+  li p{
+    font: 200 15px/ 1.5 Georgia, Times New Roman, serif; 
+  }
+  li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 0;
+    list-style: none;
+  }
+  li:hover{
+    background: rgba(255, 255, 255, 0.39);
+    cursor: pointer;
+  }
+  .Conference_List_Conf_Name{
+    text-align: center;
+    width:75%;
+  }
+  .Conference_List_Dates{
+    text-align: left;
+    width:25%;
+  }
+
+
+.form-select{
+  margin-bottom: 30px;
+}
+
+.form-select.Reviewer_Dropdown{
+  margin-bottom: 0px;
+  width: fit-content;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+  /*Detail list styling*/
+  .Item_Details{
+    font-size: 30px;
+    background-color: rgba(0, 0, 0, 0.39);
+    border-radius: 30px;
+    padding: 10px;
+    max-width: 800px;
+  }
+
+  .Paper_Status_Title{
+    width: 100px;
+    text-align: center;
+  }
+
+  .Paper_Content{
+    text-align: left;
+    padding: 5px;
+    font-weight: normal;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 25px;
+  }
+
+  .btn.btn_reviewer{
+    margin: 10px;
+    width: 160px;
+    height: 65px;
+    font-size: 25px;
+    border: 2px solid black;
+  }
+
+  .btn.btn_Chair{
+    margin: 10px;
+    width: 80px;
+    height: 60px;
+    font-size: 15px;
+    border: 2px solid black;
+  }
